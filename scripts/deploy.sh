@@ -8,7 +8,7 @@ set -u # or set -o nounset
 # Echo the values to ensure they're being passed correctly
 echo "Deploying images from: $CONTAINER_REGISTRY with version: $VERSION"
 
-# Update the image tag in the Kubernetes deployment file for book service
+# Update the image tag in the Kubernetes deployment file for netflix service
 sed -i "s|image: .*/netflixclone:.*|image: $CONTAINER_REGISTRY/netflixclone:$VERSION|g" ./scripts/Kubernetes/deployment.yaml
 
 # Apply the Kubernetes configuration

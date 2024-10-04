@@ -34,7 +34,7 @@ metadata:
     app: netflix-app
 spec:
   selector:
-    app: book-catalog
+    app: netflix-app
   type: LoadBalancer
   ports:
     - port: 80
