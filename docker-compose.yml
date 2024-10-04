@@ -3,7 +3,7 @@ services:
   netflix:
     image: netflixclone:latest
     build:
-      context: ./netflixclone
+      context: ./
       dockerfile: Dockerfile
       args:
         - TMDB_V3_API_KEY=dd049199416fb29c502b0077769dd151
