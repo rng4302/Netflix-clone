@@ -9,7 +9,7 @@ set -u # or set -o nounset
 echo "Deploying images from: $CONTAINER_REGISTRY with version: $VERSION"
 
 # Update the image tag in the Kubernetes deployment file for book service
-sed -i "s|image: .*/netflixclone:.*|image: $CONTAINER_REGISTRY/netflixclone:$VERSION|g" ./scripts/kubernetes/deployment.yaml
+sed -i "s|image: .*/netflixclone:.*|image: $CONTAINER_REGISTRY/netflixclone:$VERSION|g" ./scripts/Kubernetes/deployment.yaml
 
 # Apply the Kubernetes configuration
-kubectl apply -f ./scripts/kubernetes/deployment.yaml
+kubectl apply -f ./scripts/Kubernetes/deployment.yaml
