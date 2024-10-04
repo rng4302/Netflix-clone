@@ -22,7 +22,7 @@ spec:
         - containerPort: 80
         env:
         - name: PORT
-          value: "5001"
+          value: "80"
         - name: DATABASE_URL
           value: postgresql://netflix_clone_ninc_user:9Uy5Ha1AnS4g1MYfpBU52O9vGMVJ4iGM@dpg-crvvbja3esus73981o7g-a.oregon-postgres.render.com/netflix_clone_ninc
 ---
