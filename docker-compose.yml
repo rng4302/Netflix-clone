@@ -1,10 +1,16 @@
 version: '3.7'
 services:
   netflix:
+    image: netflix-clone:latest
     build:
-      context: ./
+      context: ./netflix-clone
       dockerfile: Dockerfile
       args:
         - TMDB_V3_API_KEY=dd049199416fb29c502b0077769dd151
+        - NO_CACHE=true
     ports:
       - "80:80"
+    environment:
+      - PORT=80
+      - DATABASE_URL=postgresql://netflix_clone_ninc_user:9Uy5Ha1AnS4g1MYfpBU52O9vGMVJ4iGM@dpg-crvvbja3esus73981o7g-a.oregon-postgres.render.com/netflix_clone_ninc
+    restart: "no"

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netflix-app
+  labels:
+    app: netflix-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netflix-app
+  template:
+    metadata:
+      labels:
+        app: netflix-app
+    spec:
+      containers:
+      - name: netflix-app
+        image: ${{ secrets.CONTAINER_REGISTRY  }}/netflix-clone:$VERSION
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: PORT
+          value: "5001"
+        - name: DATABASE_URL
+          value: postgresql://netflix_clone_ninc_user:9Uy5Ha1AnS4g1MYfpBU52O9vGMVJ4iGM@dpg-crvvbja3esus73981o7g-a.oregon-postgres.render.com/netflix_clone_ninc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netflix-app
+  labels:
+    app: netflix-app
+spec:
+  selector:
+    app: book-catalog
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
