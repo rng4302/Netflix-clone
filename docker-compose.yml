@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  netflix:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - TMDB_V3_API_KEY=dd049199416fb29c502b0077769dd151
+    ports:
+      - "80:80"
