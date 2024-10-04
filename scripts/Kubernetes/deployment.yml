@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: netflix-app
-        image: ${{ secrets.CONTAINER_REGISTRY  }}/netflix-clone:$VERSION
+        image: ${{ secrets.CONTAINER_REGISTRY  }}/netflixClone:$VERSION
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

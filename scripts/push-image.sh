@@ -7,4 +7,4 @@ set -u # or set -o nounset
 : "$CONTAINER_REGISTRY"
 
 echo $REGISTRY_PW | docker login $CONTAINER_REGISTRY --username $REGISTRY_UN --password-stdin
-docker push $CONTAINER_REGISTRY/netflix-clone:$VERSION
+docker push $CONTAINER_REGISTRY/netflixClone:$VERSION
