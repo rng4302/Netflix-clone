@@ -1,5 +1,5 @@
 variable "app_name" {
-  default = "netflixClone"
+  default = "netflixclone"
 }
 
 variable "location" {
