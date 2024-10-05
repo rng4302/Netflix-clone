@@ -34,8 +34,8 @@ jobs:
         run: |
           helm upgrade --install prometheus prometheus-community/prometheus \
             --namespace default \
-            --set alertmanager.persistentVolume.storageClass="default",
-            --set server.persistentVolume.storageClass="default"
+            --set alertmanager.persistentVolume.storageClass="" \
+            --set server.persistentVolume.storageClass=""
 
       # Add Grafana Helm chart repository
       - name: Add Grafana Helm repository
@@ -49,5 +49,5 @@ jobs:
           helm upgrade --install grafana grafana/grafana \
             --namespace default \
             --set persistence.enabled=true \
-            --set persistence.storageClassName="default",
+            --set persistence.storageClassName="" \
             --set adminPassword='admin'
