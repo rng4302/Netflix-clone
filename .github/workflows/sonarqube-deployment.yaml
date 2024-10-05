@@ -1,0 +1,23 @@
+name: Deploy SonarQube
+
+on:
+  workflow_dispatch:  # Manual trigger to deploy SonarQube
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up kubectl using base64 kubeconfig from GitHub secret
+      - name: Set up Kubernetes
+      - uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+          kubectl-version: v1.24.2
+      # Deploy SonarQube in Kubernetes
+      - name: Deploy SonarQube in Kubernetes
+        run: |
+          kubectl apply -f ./scripts/kubernetes/sonarqube-deployment.yaml
