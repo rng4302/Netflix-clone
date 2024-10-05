@@ -13,10 +13,11 @@ jobs:
 
       # Set up kubectl using base64 kubeconfig from GitHub secret
       - name: Set up Kubernetes
-      - uses: tale/kubectl-action@v1
+        uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
           kubectl-version: v1.24.2
+
       # Deploy SonarQube in Kubernetes
       - name: Deploy SonarQube in Kubernetes
         run: |
