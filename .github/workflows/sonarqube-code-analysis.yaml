@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   code_analysis:
@@ -16,18 +17,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Install Node.js (for TypeScript projects)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Set the desired Node.js version
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
       # Install SonarQube Scanner
       - name: Install SonarQube Scanner
         run: |
           sudo apt-get install openjdk-11-jre
-          sudo apt-get install sonar-scanner
+          npm install -g sonar-scanner
 
-      # Run SonarQube scan
+      # Run TypeScript SonarQube scan
       - name: Run SonarQube Scan
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=your_project_key \
+            -Dsonar.projectKey=Netflix_Clone \
             -Dsonar.sources=./ \
+            -Dsonar.language=ts \
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.host.url=http://52.147.51.124:9000 \
             -Dsonar.login=$SONARQUBE_TOKEN
         env:
