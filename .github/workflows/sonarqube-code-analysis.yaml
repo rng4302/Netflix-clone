@@ -23,6 +23,13 @@ jobs:
         with:
           node-version: '16'  # Set the desired Node.js version
 
+      # Install Java 17 (SonarQube requires at least Java 17)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'  # Java distribution
+
       # Install dependencies
       - name: Install Dependencies
         run: npm install
@@ -30,7 +37,6 @@ jobs:
       # Install SonarQube Scanner
       - name: Install SonarQube Scanner
         run: |
-          sudo apt-get install openjdk-11-jre
           npm install -g sonar-scanner
 
       # Run TypeScript SonarQube scan
