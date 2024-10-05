@@ -50,4 +50,5 @@ jobs:
             --namespace default \
             --set persistence.enabled=true \
             --set persistence.storageClassName="" \
-            --set adminPassword='admin'
+            --set adminPassword='admin' \
+            --set service.type=LoadBalancer
