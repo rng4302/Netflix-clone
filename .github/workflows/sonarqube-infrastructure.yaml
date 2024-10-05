@@ -21,4 +21,4 @@ jobs:
       # Deploy SonarQube in Kubernetes
       - name: Deploy SonarQube in Kubernetes
         run: |
-          kubectl apply -f ./scripts/kubernetes/sonarqube-deployment.yaml
+          kubectl apply -f ./scripts/Kubernetes/sonarqube-deployment.yaml
