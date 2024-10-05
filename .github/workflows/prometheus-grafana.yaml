@@ -1,0 +1,53 @@
+name: Deploy Prometheus and Grafana
+
+on:
+  workflow_dispatch:  # Manual trigger to deploy Prometheus and Grafana
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up kubectl using base64 kubeconfig from GitHub secret
+      - name: Set up Kubernetes
+        uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+          kubectl-version: v1.24.2
+
+      # Install Helm
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      # Add Prometheus Helm chart repository
+      - name: Add Prometheus Helm repository
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo update
+
+      # Deploy Prometheus using Helm
+      - name: Deploy Prometheus in Kubernetes
+        run: |
+          helm install prometheus prometheus-community/prometheus \
+            --namespace default \
+            --set alertmanager.persistentVolume.storageClass="",
+            --set server.persistentVolume.storageClass=""
+
+      # Add Grafana Helm chart repository
+      - name: Add Grafana Helm repository
+        run: |
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo update
+
+      # Deploy Grafana using Helm
+      - name: Deploy Grafana in Kubernetes
+        run: |
+          helm install grafana grafana/grafana \
+            --namespace default \
+            --set persistence.enabled=true \
+            --set persistence.storageClassName="",
+            --set adminPassword='admin'
