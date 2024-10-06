@@ -47,7 +47,7 @@ jobs:
             -Dsonar.sources=./ \
             -Dsonar.language=ts \
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
-            -Dsonar.host.url=http://52.147.51.124:9000 \
+            -Dsonar.host.url=http://13.70.183.145:9000 \
             -Dsonar.login=$SONARQUBE_TOKEN
         env:
           SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
